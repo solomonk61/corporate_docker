@@ -32,12 +32,14 @@ services:
       - 1337:1337
     depends_on:
       - db
+    command: npm run develop
 
   frontend:
     build:
       context: ./frontend
     environment:
       NEXT_PUBLIC_STRAPI_API_URL: http://backend:1337
+      # NEXT_PUBLIC_STRAPI_API_URL: ${NEXT_PUBLIC_STRAPI_API_URL}
       PREVIEW_SECRET: ${PREVIEW_SECRET}
     volumes:
       - ./frontend:/usr/src/app
@@ -45,3 +47,4 @@ services:
       - 3000:3000
     depends_on:
       - backend
+    command: npm run dev
